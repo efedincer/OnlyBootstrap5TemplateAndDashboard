@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@ViewBag.Title</title>
+</head>
+<body>
+
+
+  <!-- Admin Paneli Başlangıç -->
+  <div class="container py-5">
+    <h2 class="text-center mb-4">Admin Paneli</h2>
+    <div class="row">
+      <!-- Siparişler -->
+      <div class="col-md-3">
+        <div class="card text-white bg-primary">
+          <div class="card-body">
+            <h5 class="card-title">Siparişler</h5>
+            <p class="card-text">Toplam Sipariş Sayısı: 45</p>
+            <a href="#" class="btn btn-light">Detaylar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ürünler -->
+      <div class="col-md-3">
+        <div class="card text-white bg-success">
+          <div class="card-body">
+            <h5 class="card-title">Ürünler</h5>
+            <p class="card-text">Toplam Ürün Sayısı: 120</p>
+            <a href="#" class="btn btn-light">Detaylar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kullanıcılar -->
+      <div class="col-md-3">
+        <div class="card text-white bg-danger">
+          <div class="card-body">
+            <h5 class="card-title">Kullanıcılar</h5>
+            <p class="card-text">Toplam Kullanıcı Sayısı: 500</p>
+            <a href="#" class="btn btn-light">Detaylar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    @RenderBody()
+  </div>
+</body>
+</html>

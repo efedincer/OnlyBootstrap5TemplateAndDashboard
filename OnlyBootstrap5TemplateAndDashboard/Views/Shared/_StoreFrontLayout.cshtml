@@ -1,13 +1,309 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@ViewData["Title"] - Store</title>
+  @* @await Html.PartialAsync("_Metas") *@
+  @await Html.PartialAsync("_Styles")
+  @await RenderSectionAsync("Styles", required: false)
+  <style>
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&q=80');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    /* Ürün Kartı Hover Efekti */
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+  </style>
 </head>
 <body>
-    <div>
-        @RenderBody()
+
+  <!-- Başlık ve Navigasyon Menüsü -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Mağaza</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Ana Sayfa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Ürünler</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hakkımızda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">İletişim</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-dark text-white py-2">
+    <div class="container d-flex justify-content-between">
+      <div>🛍️ <strong>Mağazam</strong></div>
+      <div>
+        <a href="#" class="text-white text-decoration-none mx-2">Giriş Yap</a>
+        <a href="#" class="text-white text-decoration-none mx-2">Kayıt Ol</a>
+        <a href="#" class="text-white text-decoration-none mx-2">Sepet (0)</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  @* <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Mağaza</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Anasayfa</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ürünler</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">İletişim</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav> *@
+
+  <!-- Hero Section -->
+  <section class="hero bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">En Kaliteli Ürünleri Keşfet!</h1>
+      <p class="lead">Uygun fiyatlarla harika ürünleri hemen satın alın.</p>
+      <a href="#" class="btn btn-light btn-lg mt-3">Alışverişe Başla</a>
+    </div>
+  </section>
+
+  <!-- Slider (Carousel) -->
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/slider1.jpg" class="d-block w-100" alt="First Slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Yeni Ürünler</h5>
+          <p>Moda ve teknolojiye dair en son trendler!</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/slider2.jpg" class="d-block w-100" alt="Second Slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Ücretsiz Kargo</h5>
+          <p>Bugün sipariş ver, ücretsiz kargo fırsatını kaçırma!</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/slider3.jpg" class="d-block w-100" alt="Third Slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Özel İndirimler</h5>
+          <p>Birçok üründe %50'ye varan indirim fırsatları!</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+  <!-- Öne Çıkan Kategoriler -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4">Öne Çıkan Kategoriler</h2>
+    <div class="row g-4">
+      <!-- Kategori 1 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center shadow-sm">
+          <img src="/images/electronics.jpg" class="card-img-top" alt="Elektronik">
+          <div class="card-body">
+            <h5 class="card-title">Elektronik</h5>
+            <p class="card-text">Son teknoloji ürünleri keşfet!</p>
+            <a href="#" class="btn btn-primary btn-sm">İncele</a>
+          </div>
+        </div>
+      </div>
+      <!-- Kategori 2 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center shadow-sm">
+          <img src="/images/fashion.jpg" class="card-img-top" alt="Moda">
+          <div class="card-body">
+            <h5 class="card-title">Moda</h5>
+            <p class="card-text">En trend kıyafetleri bul!</p>
+            <a href="#" class="btn btn-primary btn-sm">İncele</a>
+          </div>
+        </div>
+      </div>
+      <!-- Kategori 3 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center shadow-sm">
+          <img src="/images/furniture.jpg" class="card-img-top" alt="Mobilya">
+          <div class="card-body">
+            <h5 class="card-title">Mobilya</h5>
+            <p class="card-text">Evin için harika tasarımlar!</p>
+            <a href="#" class="btn btn-primary btn-sm">İncele</a>
+          </div>
+        </div>
+      </div>
+      <!-- Kategori 4 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center shadow-sm">
+          <img src="/images/cosmetics.jpg" class="card-img-top" alt="Kozmetik">
+          <div class="card-body">
+            <h5 class="card-title">Kozmetik</h5>
+            <p class="card-text">Cildin için en iyisini al!</p>
+            <a href="#" class="btn btn-primary btn-sm">İncele</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ürünler -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4">Ürünler</h2>
+    <div class="row g-4">
+      <!-- Ürün Kartı -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm">
+          <img src="images/product1.jpg" class="card-img-top" alt="Ürün 1">
+          <div class="card-body">
+            <h5 class="card-title">Ürün Adı</h5>
+            <p class="card-text">Ürün açıklaması kısa bir şekilde burada yer alacak.</p>
+            <div class="d-flex justify-content-between">
+              <span class="text-primary">$199.99</span>
+              <button class="btn btn-sm btn-success">Sepete Ekle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ürün Kartı -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm">
+          <img src="images/product2.jpg" class="card-img-top" alt="Ürün 2">
+          <div class="card-body">
+            <h5 class="card-title">Ürün Adı</h5>
+            <p class="card-text">Ürün açıklaması kısa bir şekilde burada yer alacak.</p>
+            <div class="d-flex justify-content-between">
+              <span class="text-primary">$149.99</span>
+              <button class="btn btn-sm btn-success">Sepete Ekle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diğer Ürünler ... -->
+    </div>
+  </section>
+
+  <!-- Arama ve Filtreleme -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4">Ürünleri Filtrele</h2>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Ürün Ara..." id="searchInput">
+          <button class="btn btn-primary" type="button" id="searchButton">Ara</button>
+        </div>
+        <select class="form-select" aria-label="Filtreleme" id="categoryFilter">
+          <option selected>Bir Kategori Seçin</option>
+          <option value="electronics">Elektronik</option>
+          <option value="fashion">Moda</option>
+          <option value="furniture">Mobilya</option>
+          <option value="cosmetics">Kozmetik</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Öne Çıkan Ürünler -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4">Öne Çıkan Ürünler</h2>
+    <div class="row g-4">
+      <!-- Ürün Kartı -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm">
+          <img src="images/product1.jpg" class="card-img-top" alt="Ürün 1">
+          <div class="card-body">
+            <h5 class="card-title">Ürün 1</h5>
+            <p class="card-text">Bu ürün çok tercih ediliyor.</p>
+            <a href="#" class="btn btn-primary btn-sm">Sepete Ekle</a>
+          </div>
+        </div>
+      </div>
+      <!-- Ürün Kartı -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm">
+          <img src="images/product2.jpg" class="card-img-top" alt="Ürün 2">
+          <div class="card-body">
+            <h5 class="card-title">Ürün 2</h5>
+            <p class="card-text">Yüksek kalite ve uygun fiyat!</p>
+            <a href="#" class="btn btn-primary btn-sm">Sepete Ekle</a>
+          </div>
+        </div>
+      </div>
+      <!-- Ürün Kartı -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm">
+          <img src="images/product3.jpg" class="card-img-top" alt="Ürün 3">
+          <div class="card-body">
+            <h5 class="card-title">Ürün 3</h5>
+            <p class="card-text">Şimdi satın al, hemen kullanmaya başla.</p>
+            <a href="#" class="btn btn-primary btn-sm">Sepete Ekle</a>
+          </div>
+        </div>
+      </div>
+      <!-- Ürün Kartı -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm">
+          <img src="images/product4.jpg" class="card-img-top" alt="Ürün 4">
+          <div class="card-body">
+            <h5 class="card-title">Ürün 4</h5>
+            <p class="card-text">Ürün açıklaması burada yer alır.</p>
+            <a href="#" class="btn btn-primary btn-sm">Sepete Ekle</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Ana İçerik Alanı -->
+  <div class="container mt-4">
+    @RenderBody()
+  </div>
+
+  @await Html.PartialAsync("_Footer")
+  @await RenderSectionAsync("Scripts", required: false)
+  @await Html.PartialAsync("_Scripts")
 </body>
 </html>
